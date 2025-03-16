@@ -6,6 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:5000";
 
 // Frontend.
 const Login = () => {
@@ -21,10 +22,10 @@ const Login = () => {
   const handleSubmit = async (values, { setSubmitting, setErrors }) => {
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/auth/admin/login",
+        `${API_BASE_URL}/api/auth/admin/login`, 
         values,
         { withCredentials: true }
-      );
+    );
 
       if (response.status === 200) {
         localStorage.setItem("jwt", response.data.token);
